@@ -28,5 +28,5 @@ class RefinerAgent (AgentBase):
             }
         ]
         
-        refined_article = self.call_openai(messages, max_tokens=1024)
+        refined_article = self.call_openai(messages, temperature=0.3, max_tokens=1024)
         return refined_article
