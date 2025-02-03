@@ -27,5 +27,4 @@ class AgentManager:
         
         if not agent:
             raise ValueError(f"Agent {agent_name} not found.")
-        return agent 
-        
+        return agent
