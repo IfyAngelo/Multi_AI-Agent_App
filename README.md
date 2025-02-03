@@ -62,9 +62,9 @@ Before you can run this project, make sure you have the following installed:
 
 1. Clone the repository:
 
-```
-git clone https://github.com/your-username/fastapi-dockerized.git
-cd fastapi-dockerized
+   ```
+   git clone https://github.com/your-username/fastapi-dockerized.git
+   cd fastapi-dockerized
 
 2. Install Python dependencies in a virtual environment (optional, but recommended):
 
