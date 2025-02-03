@@ -85,3 +85,19 @@ To run the FastAPI application locally without Docker, use the following command
 uvicorn app:app --reload
 ```
 The application will be accessible at http://127.0.0.1:8000.
+
+### Running with Docker
+
+To run the application using Docker:
+
+1. Build the Docker image:
+```
+docker build -t fastapi-app .
+```
+NB: fastapi-app is the image app name
+2. Run the Docker container:
+```
+docker run -d -p 8000:8000 --env-file .env --name fastapi-container fastapi-app
+```
+NB: fastapi-container is the container name which is changeable.
+The FastAPI application will be accessible at http://localhost:8000.
