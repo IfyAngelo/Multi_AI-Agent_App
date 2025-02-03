@@ -87,6 +87,5 @@ Before you can run this project, make sure you have the following installed:
 To run the FastAPI application locally without Docker, use the following command:
 
 ```
+bash
 uvicorn main:app --host 0.0.0.0 --port 8000
-
-
