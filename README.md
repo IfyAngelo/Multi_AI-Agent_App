@@ -62,21 +62,21 @@ Before you can run this project, make sure you have the following installed:
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/your-username/fastapi-dockerized.git
-   cd fastapi-dockerized
+```
+git clone https://github.com/your-username/fastapi-dockerized.git
+cd fastapi-dockerized
 
 2. Install Python dependencies in a virtual environment (optional, but recommended):
 
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
+```
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 
 3. Create a .env file with the necessary environment variables (e.g., OpenAI API key):
 
-   ```bash
-   OPEN_API_KEY = your key in string format
+```
+OPEN_API_KEY = "your key in string format"
 
 ---
 
@@ -87,5 +87,4 @@ Before you can run this project, make sure you have the following installed:
 To run the FastAPI application locally without Docker, use the following command:
 
 ```
-bash
 uvicorn main:app --host 0.0.0.0 --port 8000
