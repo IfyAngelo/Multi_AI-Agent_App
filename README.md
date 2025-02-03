@@ -110,3 +110,17 @@ The FastAPI application will be accessible at http://localhost:8000.
 ### Summarize Medical Texts
 
 - **Endpoint:** /summarize
+- **Method:** POST
+- **Description:** Summarize medical texts using the OpenAI API.
+- **Input:**
+```
+{
+  "text": "Enter medical text to summarize"
+}
+```
+- **Output:**
+```
+{
+  "summary": "Summarized medical text."
+}
+```
