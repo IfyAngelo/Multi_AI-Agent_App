@@ -187,3 +187,30 @@ curl -X 'POST' \
 ---
 
 ## Logging
+
+The application uses the Loguru library for logging, which is configured to write logs to both the console and a log file. Logs are stored in the logs directory and can be useful for debugging.
+
+---
+
+## Error Handling
+
+In case of errors, the system will return appropriate error messages with HTTP status codes. If there's an issue with the OpenAI API call, retries will be attempted based on the retry configuration. Any failures will be logged for review.
+
+---
+
+## Contributing
+
+1. Fork the repository.
+2. Clone your fork to your local machine.
+3. Create a new branch for your feature or bug fix.
+4. Commit your changes.
+5. Push the branch to your forked repository.
+6. Open a Pull Request to the main repository.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+---
