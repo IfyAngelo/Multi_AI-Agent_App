@@ -2,6 +2,7 @@ from .refiner_agent import RefinerAgent
 from .write_article_validator_agent import WriteArticlealidatorAgent
 from .sanitize_data_validator_agent import SanitizeDataValidatorAgent
 from .summary_validator_agent import SummaryValidatorAgent
+from .validator_agent import ValidatorAgent
 
 from src.tools.sanitize_data_tool import SanitizeDataTool
 from src.tools.summarize_tool import SummarizeTool
@@ -14,10 +15,11 @@ class AgentManager:
         "write_article": WriteArticleTool(max_retries=max_retries, verbose=verbose),
         "sanitize_data": SanitizeDataTool(max_retries=max_retries, verbose=verbose),
 
-        "summarize_validator_agent": SummaryValidatorAgent(max_retries=max_retries, verbose=verbose),
-        "write_article_validator_agent": WriteArticlealidatorAgent(max_retries=max_retries, verbose=verbose),
-        "sanitize_data_validator_agent": SanitizeDataValidatorAgent(max_retries=max_retries, verbose=verbose),
-        "refiner_agent": RefinerAgent(max_retries=max_retries, verbose=verbose)
+        "summarize_validator": SummaryValidatorAgent(max_retries=max_retries, verbose=verbose),
+        "write_article_validator": WriteArticlealidatorAgent(max_retries=max_retries, verbose=verbose),
+        "sanitize_data_validator": SanitizeDataValidatorAgent(max_retries=max_retries, verbose=verbose),
+        "refiner": RefinerAgent(max_retries=max_retries, verbose=verbose),
+        "validator": ValidatorAgent(max_retries=max_retries, verbose=verbose)
         }
     
     def get_agent(self, agent_name):

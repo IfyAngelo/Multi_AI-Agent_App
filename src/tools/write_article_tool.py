@@ -1,4 +1,4 @@
-from agents.agent_base import AgentBase
+from src.agents.agent_base import AgentBase
 
 class WriteArticleTool(AgentBase):
     def __init__(self, max_retries, verbose=True):
@@ -16,6 +16,6 @@ class WriteArticleTool(AgentBase):
             {"role": "system", "content": system_message},
             {"role": "user", "content": user_content}
         ]
-        
+
         article = self.call_openai(messages, max_tokens=1000)
         return article

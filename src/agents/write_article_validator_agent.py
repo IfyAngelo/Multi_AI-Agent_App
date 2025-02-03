@@ -1,4 +1,4 @@
-from agents.agent_base import AgentBase
+from .agent_base import AgentBase
 
 class WriteArticlealidatorAgent(AgentBase):
     def __init__(self, max_retries=2, verbose=True):
