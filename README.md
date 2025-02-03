@@ -1,6 +1,6 @@
-# FastAPI Dockerized Application
+# Multi AI-Agentic System from Scratch
 
-This project provides a FastAPI web application for performing various tasks with AI agents. It is dockerized for easy deployment and scalability. The application provides endpoints for medical text summarization, article writing and refinement, sanitizing medical data (PHI removal), and more. This project is designed to run seamlessly with Docker.
+This project provides a FastAPI multi ai-agentic tool for performing various tasks with AI agents. It was developed from scratch with pure python and zero framework. It is dockerized for easy deployment and scalability. The application provides endpoints for medical text summarization, article writing and refinement, sanitizing medical data (PHI removal), and more. This project is designed to run seamlessly with Docker.
 
 ---
 
@@ -28,7 +28,7 @@ This project provides a FastAPI web application for performing various tasks wit
 
 ## Project Overview
 
-This project is a **FastAPI** application designed to interact with AI agents to perform tasks such as:
+This project is a **Multi AI-Agentic** application designed to interact with AI agents to perform tasks such as:
 - **Summarizing Medical Text**
 - **Writing and Refining Research Articles**
 - **Sanitizing Medical Data by Removing Protected Health Information (PHI)**
