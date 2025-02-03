@@ -124,3 +124,45 @@ The FastAPI application will be accessible at http://localhost:8000.
   "summary": "Summarized medical text."
 }
 ```
+
+### Write and Refine Research Articles
+
+- **Endpoint:** /write_and_refine
+- **Method:** POST
+- **Description:** Write and refine research articles based on a provided topic and optional outline.
+- **Input:**
+```
+{
+  "topic": "Research topic",
+  "outline": "Optional outline for the article"
+}
+```
+- **Output:**
+```
+{
+  "draft": "Draft article content",
+  "refined_article": "Refined article content"
+}
+```
+
+### Sanitize Medical Data (PHI Removal)
+
+- **Endpoint:** /sanitize
+- "Method": POST
+- **Description:** Sanitize medical data by removing Protected Health Information (PHI).
+- **Input:**
+```
+{
+  "medical_data": "Original medical data"
+}
+```
+- **Output:**
+```
+{
+  "sanitized_data": "Sanitized medical data"
+}
+```
+
+---
+
+## 
