@@ -100,4 +100,13 @@ NB: fastapi-app is the image app name
 docker run -d -p 8000:8000 --env-file .env --name fastapi-container fastapi-app
 ```
 NB: fastapi-container is the container name which is changeable.
+
 The FastAPI application will be accessible at http://localhost:8000.
+
+---
+
+## API Endpoints
+
+### Summarize Medical Texts
+
+- **Endpoint:** /summarize
