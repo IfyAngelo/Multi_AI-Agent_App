@@ -165,4 +165,25 @@ The FastAPI application will be accessible at http://localhost:8000.
 
 ---
 
-## 
+### Testing
+
+To test the FastAPI endpoints, you can use tools like Postman or curl. Here's how to test the /summarize endpoint:
+
+1. Postman:
+    - Set the request type to POST.
+    - Set the endpoint to `http://localhost:8000/summarize`.
+    - In the body, select "raw" and choose JSON.
+    - Send the text parameter as a JSON object.
+2. Curl:
+```
+curl -X 'POST' \
+  'http://localhost:8000/summarize' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "text": "Some medical text"
+  }'
+```
+
+---
+
+## Logging
