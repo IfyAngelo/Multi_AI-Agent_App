@@ -82,4 +82,5 @@ Before you can run this project, make sure you have the following installed:
 
 To run the FastAPI application locally without Docker, use the following command:
 ```
-   OPEN_API_KEY = "your key in string format"
+uvicorn app:app --reload
+The 
