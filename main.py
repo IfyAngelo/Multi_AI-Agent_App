@@ -17,13 +17,16 @@ agent_manager = AgentManager(max_retries=3, verbose=True)
 
 class SummarizationRequest(BaseModel):
     text: str
+    llm_provider: str = "openai"
 
 class WritingRequest(BaseModel):
     topic: str
     outline: str = None
+    llm_provider: str = "openai"
 
 class SanitizationRequest(BaseModel):
     medical_data: str
+    llm_provider: str = "openai"
 
 # ------------------- Summarization Endpoint -------------------
 
@@ -32,6 +35,8 @@ async def summarize_text(request: SummarizationRequest):
     """API for summarizing medical text."""
     main_agent = agent_manager.get_agent("summarize")
     validator_agent = agent_manager.get_agent("summarize_validator")
+
+    main_agent.llm_provider = request.llm_provider.lower()
 
     try:
         summary = main_agent.execute(request.text)
@@ -56,6 +61,10 @@ async def write_and_refine_article(request: WritingRequest):
     writer_agent = agent_manager.get_agent("write_article")
     refiner_agent = agent_manager.get_agent("refiner")
     validator_agent = agent_manager.get_agent("validator")
+
+    writer_agent.llm_provider = request.llm_provider.lower()
+    refiner_agent.llm_provider = request.llm_provider.lower()
+    validator_agent.llm_provider = request.llm_provider.lower()
 
     try:
         draft = writer_agent.execute(request.topic, request.outline)
@@ -85,6 +94,9 @@ async def sanitize_medical_data(request: SanitizationRequest):
     """API for sanitizing medical data (PHI removal)."""
     main_agent = agent_manager.get_agent("sanitize_data")
     validator_agent = agent_manager.get_agent("sanitize_data_validator")
+
+    main_agent.llm_provider = request.llm_provider.lower()
+    validator_agent.llm_provider = request.llm_provider.lower()
 
     try:
         sanitized_data = main_agent.execute(request.medical_data)

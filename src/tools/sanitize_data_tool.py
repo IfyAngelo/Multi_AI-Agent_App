@@ -1,8 +1,8 @@
 from src.agents.agent_base import AgentBase
 
 class SanitizeDataTool(AgentBase):
-    def __init__(self, max_retries, verbose=True):
-        super().__init__(name="SanitizeDataTool", max_retries=max_retries, verbose=verbose)
+    def __init__(self, llm_provider="openai", max_retries=3, verbose=True):
+        super().__init__(name="SanitizeDataTool", llm_provider=llm_provider, max_retries=max_retries, verbose=verbose)
 
     def execute(self, medical_data):
         messages = [
@@ -15,5 +15,5 @@ class SanitizeDataTool(AgentBase):
                 )
             }
         ]
-        sanitized_data = self.call_openai(messages, max_tokens=300)
+        sanitized_data = self.call_llm(messages, max_tokens=300)
         return sanitized_data

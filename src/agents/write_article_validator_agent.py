@@ -1,8 +1,8 @@
 from .agent_base import AgentBase
 
 class WriteArticlealidatorAgent(AgentBase):
-    def __init__(self, max_retries=2, verbose=True):
-        super().__init__(name="WriteArticleValidatorAgent", max_retries=max_retries, verbose=verbose)
+    def __init__(self, llm_provider="openai", max_retries=3, verbose=True):
+        super().__init__(name="WriteArticleValidatorAgent", llm_provider=llm_provider, max_retries=max_retries, verbose=verbose)
 
     def execute(self, topic, article, outline=None):
         system_message = "You are an expert AI assistant that validates research articles on various topics."
@@ -18,5 +18,5 @@ class WriteArticlealidatorAgent(AgentBase):
             {"role": "user", "content": user_content}
         ]
         
-        validation = self.call_openai(messages, max_tokens=512)
+        validation = self.call_llm(messages, max_tokens=512)
         return validation

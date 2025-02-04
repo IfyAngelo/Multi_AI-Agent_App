@@ -1,8 +1,8 @@
 from src.agents.agent_base import AgentBase
 
 class WriteArticleTool(AgentBase):
-    def __init__(self, max_retries, verbose=True):
-        super().__init__(name="WriteArticleTool", max_retries=max_retries, verbose=verbose)
+    def __init__(self, llm_provider="openai", max_retries=3, verbose=True):
+        super().__init__(name="WriteArticleTool", llm_provider=llm_provider, max_retries=max_retries, verbose=verbose)
 
     def execute(self, topic, outline=None):
         system_message = "You are an expert AI academic writer that writes articles on various topics."
@@ -17,5 +17,5 @@ class WriteArticleTool(AgentBase):
             {"role": "user", "content": user_content}
         ]
 
-        article = self.call_openai(messages, max_tokens=1000)
+        article = self.call_llm(messages, max_tokens=1000)
         return article

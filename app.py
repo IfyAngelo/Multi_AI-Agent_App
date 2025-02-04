@@ -16,6 +16,10 @@ def main():
 
     st.sidebar.title("Select Task")
 
+    # 🔹 User selects LLM provider
+    llm_provider = st.sidebar.radio("Choose LLM Provider:", ["OpenAI", "Groq"]).lower()
+
+
     task = st.sidebar.selectbox("Choose a task: ", [
             "Summarize Medical Text",
             "Write and Refine Research Articles",
@@ -26,21 +30,25 @@ def main():
     agent_manager = AgentManager(max_retries=3, verbose=True)
 
     if task == "Summarize Medical Text":
-        summarize_section(agent_manager)
+        summarize_section(agent_manager, llm_provider)
     
     elif task == "Write and Refine Research Articles":
-        write_and_refine_article_section(agent_manager)
+        write_and_refine_article_section(agent_manager, llm_provider)
 
     elif task == "Sanitize Medical Data (PHI Removal)":
-        sanitize_data_section(agent_manager)
+        sanitize_data_section(agent_manager, llm_provider)
 
-def summarize_section(agent_manager):
+def summarize_section(agent_manager, llm_provider):
     st.header("Summarize Medical Text")
     text = st.text_area("Enter medical text to summarize:", height=200)
     if st.button("Summarize"):
         if text:
             main_agent = agent_manager.get_agent("summarize")
             validator_agent = agent_manager.get_agent("summarize_validator")
+            
+            main_agent.llm_provider = llm_provider
+            validator_agent.llm_provider = llm_provider
+
             with st.spinner("Summarizing..."):
                 try:
                     summary = main_agent.execute(text)
@@ -62,7 +70,7 @@ def summarize_section(agent_manager):
         else:
             st.warning("Please enter some text to summarize.")
 
-def write_and_refine_article_section(agent_manager):
+def write_and_refine_article_section(agent_manager, llm_provider):
     st.header("Write and Refine Research Article")
     topic = st.text_input("Enter the topic for the research article:")
     outline = st.text_area("Enter an outline (optional):", height=150)
@@ -71,6 +79,11 @@ def write_and_refine_article_section(agent_manager):
             writer_agent = agent_manager.get_agent("write_article")
             refiner_agent = agent_manager.get_agent("refiner")
             validator_agent = agent_manager.get_agent("validator")
+            
+            writer_agent.llm_provider = llm_provider
+            refiner_agent.llm_provider = llm_provider
+            validator_agent.llm_provider = llm_provider
+
             with st.spinner("Writing article..."):
                 try:
                     draft = writer_agent.execute(topic, outline)
@@ -102,13 +115,17 @@ def write_and_refine_article_section(agent_manager):
         else:
             st.warning("Please enter a topic for the research article.")
 
-def sanitize_data_section(agent_manager):
+def sanitize_data_section(agent_manager, llm_provider):
     st.header("Sanitize Medical Data (PHI)")
     medical_data = st.text_area("Enter medical data to sanitize:", height=200)
     if st.button("Sanitize Data"):
         if medical_data:
             main_agent = agent_manager.get_agent("sanitize_data")
             validator_agent = agent_manager.get_agent("sanitize_data_validator")
+
+            main_agent.llm_provider = llm_provider
+            validator_agent.llm_provider = llm_provider
+
             with st.spinner("Sanitizing data..."):
                 try:
                     sanitized_data = main_agent.execute(medical_data)

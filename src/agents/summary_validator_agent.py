@@ -1,8 +1,8 @@
 from .agent_base import AgentBase
 
 class SummaryValidatorAgent(AgentBase):
-    def __init__(self, max_retries=2, verbose=True):
-        super().__init__(name="SummaryValidatorAgent", max_retries=max_retries, verbose=verbose)
+    def __init__(self, llm_provider="openai", max_retries=3, verbose=True):
+        super().__init__(name="SummaryValidatorAgent", llm_provider=llm_provider, max_retries=max_retries, verbose=verbose)
 
     def execute(self, original_text, summary):
         system_message = "You are an expert AI assistant that validates the summaries of medical text."
@@ -19,5 +19,5 @@ class SummaryValidatorAgent(AgentBase):
             {"role": "user", "content": user_content}
         ]
         
-        validation = self.call_openai(messages, max_tokens=512)
+        validation = self.call_llm(messages, max_tokens=512)
         return validation

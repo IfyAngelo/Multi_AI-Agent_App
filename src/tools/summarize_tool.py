@@ -1,8 +1,8 @@
 from src.agents.agent_base import AgentBase
 
 class SummarizeTool(AgentBase):
-    def __init__(self, max_retries, verbose=True):
-        super().__init__(name="SummarizeTool", max_retries=max_retries, verbose=verbose)
+    def __init__(self, llm_provider="openai", max_retries=3, verbose=True):
+        super().__init__(name="SummarizeTool", llm_provider=llm_provider, max_retries=max_retries, verbose=verbose)
 
     def execute(self, text):
         messages = [
@@ -15,5 +15,5 @@ class SummarizeTool(AgentBase):
                 )
             }
         ]
-        summary = self.call_openai(messages, max_tokens=300)
+        summary = self.call_llm(messages, max_tokens=300)
         return summary
