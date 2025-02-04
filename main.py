@@ -7,6 +7,14 @@ from src.agents import AgentManager
 # Load environment variables
 load_dotenv()
 
+# Get environment variables
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
+# Log to check if environment variables are loaded properly
+if not OPENAI_API_KEY or not GROQ_API_KEY:
+    raise ValueError("API keys not found in environment variables.")
+                           
 # Initialize FastAPI app
 app = FastAPI(title="Multi-Agent AI System API", version="1.0")
 
@@ -27,6 +35,14 @@ class WritingRequest(BaseModel):
 class SanitizationRequest(BaseModel):
     medical_data: str
     llm_provider: str = "openai"
+
+@app.get("/env")
+async def get_env_vars():
+    import os
+    return {
+        "OPENAI_API_KEY": os.getenv("OPENAI_API_KEY"),
+        "GROQ_API_KEY": os.getenv("GROQ_API_KEY"),
+    }
 
 # ------------------- Summarization Endpoint -------------------
 

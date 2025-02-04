@@ -85,7 +85,7 @@ class AgentBase(ABC):
                 if self.llm_provider == "openai":
                     openai.api_key = OPENAI_API_KEY
                     response = openai.chat.completions.create(
-                        model="gpt-4",
+                        model="gpt-3.5-turbo",
                         messages=messages,
                         temperature=temperature,
                         max_tokens=max_tokens,
