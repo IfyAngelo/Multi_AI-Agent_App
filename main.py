@@ -53,6 +53,7 @@ async def summarize_text(request: SummarizationRequest):
     validator_agent = agent_manager.get_agent("summarize_validator")
 
     main_agent.llm_provider = request.llm_provider.lower()
+    validator_agent.llm_provider = request.llm_provider.lower()
 
     try:
         summary = main_agent.execute(request.text)
