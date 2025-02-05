@@ -22,3 +22,4 @@ EXPOSE 8000
 
 # Start FastAPI using Gunicorn with Uvicorn workers
 CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "-w", "4", "-b", "0.0.0.0:8000", "main:app"]
+
