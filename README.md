@@ -2,6 +2,7 @@
 
 This project provides a FastAPI multi ai-agentic tool for performing various tasks with AI agents. It was developed from scratch with pure python and zero framework. It is dockerized for easy deployment and scalability. The application provides endpoints for medical text summarization, article writing and refinement, sanitizing medical data (PHI removal), and more. This project is designed to run seamlessly with Docker.
 
+Now, in addition to **OpenAI's GPT**, we have integrated **Groq LLM**, enabling more diverse AI-driven processing capabilities.
 ---
 
 ## Table of Contents
@@ -33,7 +34,7 @@ This project is a **Multi AI-Agentic** application designed to interact with AI 
 - **Writing and Refining Research Articles**
 - **Sanitizing Medical Data by Removing Protected Health Information (PHI)**
 
-It uses **OpenAI's GPT** models to process and refine text for various use cases. The project is dockerized to make deployment easier and scalable.
+It uses **OpenAI's GPT** and **Groq** models to process and refine text for various use cases. The project is dockerized to make deployment easier and scalable.
 
 ---
 
@@ -42,6 +43,7 @@ It uses **OpenAI's GPT** models to process and refine text for various use cases
 - **FastAPI** - Web framework for building APIs
 - **Docker** - Containerization for environment isolation and easier deployment
 - **OpenAI** - For natural language processing tasks (summarization, writing, etc.)
+- **Groq LLM** - Additional LLM for enchanced AI interactions
 - **Python** - Programming language
 - **Loguru** - Logging library
 - **Uvicorn** - ASGI server for FastAPI
@@ -61,7 +63,6 @@ Before you can run this project, make sure you have the following installed:
 ### Installation
 
 1. Clone the repository:
-
    ```
    git clone https://github.com/your-username/fastapi-dockerized.git
    cd fastapi-dockerized
@@ -71,9 +72,9 @@ Before you can run this project, make sure you have the following installed:
    source venv/bin/activate
    pip install -r requirements.txt
 3. Create a .env file with the necessary environment variables (e.g., OpenAI API key):
-
    ```
-   OPEN_API_KEY = "your key in string format"
+   OPEN_API_KEY="your-openai-key"
+   GROQ_API_KEY="your-groq-key"
 ---
 
 ## Running the Application
@@ -111,11 +112,12 @@ The FastAPI application will be accessible at http://localhost:8000.
 
 - **Endpoint:** /summarize
 - **Method:** POST
-- **Description:** Summarize medical texts using the OpenAI API.
+- **Description:** Summarize medical texts using the OpenAI or Groq LLM.
 - **Input:**
 ```
 {
-  "text": "Enter medical text to summarize"
+  "text": "Enter medical text to summarize",
+  "provider": "openai" // or "groq"
 }
 ```
 - **Output:**
@@ -129,12 +131,13 @@ The FastAPI application will be accessible at http://localhost:8000.
 
 - **Endpoint:** /write_and_refine
 - **Method:** POST
-- **Description:** Write and refine research articles based on a provided topic and optional outline.
+- **Description:** Write and refine research articles based on a provided topic and optional outline using OpenAI or Groq LLM.
 - **Input:**
 ```
 {
   "topic": "Research topic",
-  "outline": "Optional outline for the article"
+  "outline": "Optional outline for the article",
+  "provider": "openai" // or "groq"
 }
 ```
 - **Output:**
@@ -149,11 +152,12 @@ The FastAPI application will be accessible at http://localhost:8000.
 
 - **Endpoint:** /sanitize
 - "Method": POST
-- **Description:** Sanitize medical data by removing Protected Health Information (PHI).
+- **Description:** Sanitize medical data by removing Protected Health Information (PHI) using OpenAI or Groq LLM.
 - **Input:**
 ```
 {
-  "medical_data": "Original medical data"
+  "medical_data": "Original medical data",
+  "provider": "openai" // or "groq"
 }
 ```
 - **Output:**
@@ -180,7 +184,8 @@ curl -X 'POST' \
   'http://localhost:8000/summarize' \
   -H 'Content-Type: application/json' \
   -d '{
-    "text": "Some medical text"
+    "text": "Some medical text",
+    "provider": "openai" // or "groq"
   }'
 ```
 
