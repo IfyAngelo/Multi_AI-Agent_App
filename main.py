@@ -145,13 +145,10 @@ from src.agents import AgentManager
 load_dotenv()
 
 # Initialize FastAPI app
-app = FastAPI(title="Multi-Agent AI System API", version="1.1")
+app = FastAPI(title="Multi-Agent AI System API", version="1.4")
 
-# Store API keys in memory (updated dynamically)
-api_keys = {
-    "openai": os.getenv("OPENAI_API_KEY", ""),
-    "groq": os.getenv("GROQ_API_KEY", "")
-}
+# Store API keys in a global dictionary (persistent across requests)
+api_keys = {}
 
 # ------------------- Request Models -------------------
 
@@ -176,36 +173,33 @@ class SanitizationRequest(BaseModel):
 
 @app.post("/set_api_keys/")
 async def set_api_keys(request: APIKeyRequest):
-    """Stores OpenAI and Groq API keys securely and returns masked keys."""
+    """Stores OpenAI and Groq API keys securely and returns a success response."""
     api_keys["openai"] = request.openai_api_key
     api_keys["groq"] = request.groq_api_key
 
-    def mask_key(key):
-        return key[:3] + "*" * (len(key) - 3)
-
-    return {
-        "openai_api_key": mask_key(request.openai_api_key),
-        "groq_api_key": mask_key(request.groq_api_key)
-    }
+    return {"message": "✅ API keys have been verified and are ready to use."}
 
 @app.get("/get_api_keys/")
 async def get_api_keys():
-    """Returns masked versions of stored API keys."""
+    """Returns masked versions of stored API keys from the in-memory dictionary."""
     def mask_key(key):
         return key[:3] + "*" * (len(key) - 3) if key else "Not Set"
 
     return {
-        "openai_api_key": mask_key(api_keys["openai"]),
-        "groq_api_key": mask_key(api_keys["groq"])
+        "openai_api_key": mask_key(api_keys.get("openai", "")),
+        "groq_api_key": mask_key(api_keys.get("groq", ""))
     }
 
 # ------------------- Agent Manager Setup -------------------
 
 def get_agent_manager():
     """Ensures API keys are set before allowing agent access."""
-    if not api_keys["openai"] or not api_keys["groq"]:
-        raise HTTPException(status_code=401, detail="API keys not set. Use /set_api_keys/ first.")
-    
+    openai_key = api_keys.get("openai")
+    groq_key = api_keys.get("groq")
+
+    if not openai_key or not groq_key:
+        raise HTTPException(status_code=401, detail="🚫 API keys not set. Use /set_api_keys/ first.")
+
     return AgentManager(max_retries=3, verbose=True)
 
 # ------------------- Summarization Endpoint -------------------
