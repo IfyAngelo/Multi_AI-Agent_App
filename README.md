@@ -2,7 +2,7 @@
 
 This project provides a FastAPI multi ai-agentic tool for performing various tasks with AI agents. It was developed from scratch with pure python and zero framework. It is dockerized for easy deployment and scalability. The application provides endpoints for medical text summarization, article writing and refinement, sanitizing medical data (PHI removal), and more. This project is designed to run seamlessly with Docker.
 
-Now, in addition to OpenAI's GPT, we have integrated Groq LLM, enabling more diverse AI-driven processing capabilities.
+Now, in addition to **OpenAI's GPT**, we have integrated **Groq LLM**, enabling more diverse AI-driven processing capabilities.
 
 ---
 
