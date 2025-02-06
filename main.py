@@ -1,4 +1,5 @@
 import os
+
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from dotenv import load_dotenv
@@ -43,7 +44,6 @@ async def get_env_vars():
         "OPENAI_API_KEY": os.getenv("OPENAI_API_KEY"),
         "GROQ_API_KEY": os.getenv("GROQ_API_KEY"),
     }
-
 # ------------------- Summarization Endpoint -------------------
 
 @app.post("/summarize/")
